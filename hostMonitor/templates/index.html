@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Host Information</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Host Information</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Host Name</th>
+                <th>IP Address</th>
+                <th>MAC Address</th>
+                <th>Down Speed</th>
+                <th>Up Speed</th>
+                <th>Blocked</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for host in host_info %}
+            <tr>
+                {% for key, value in host.items() %}
+                {% if value.blocked != "1" %}
+                <td>{{ value.hostname }}</td>
+                <td>{{ value.ip }}</td>
+                <td>{{ value.mac }}</td>
+                <td>{{ value.down_speed }}</td>
+                <td>{{ value.up_speed }}</td>
+                <td>{{ "Yes" if value.blocked == "1" else "No" }}</td>
+                {% endif %}
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
